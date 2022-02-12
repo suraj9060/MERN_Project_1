@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import LandingPage from './components/LandingPage';
 import AllUser from './components/AllUser';
 import AddUser from './components/AddUser';
+import EditUser from './components/EditUser';
 import PageNotFound from './components/PageNotFound';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/all" component={AllUser} />
         <Route exact path="/add" component={AddUser} />
+        <Route exact path="/edit/:id" component={EditUser} />
         <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>

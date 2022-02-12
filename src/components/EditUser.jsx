@@ -1,16 +1,14 @@
-import React from 'react';
+import React , { useEffect }  from 'react';
 import { Button, FormControl, FormGroup, Input, InputLabel, makeStyles, Typography } from "@material-ui/core"
 import { useState } from 'react';
-import { useHistory} from "react-router-dom"
+import { useHistory , useParams} from "react-router-dom"
+import { editUser, getUsers } from './service/api';
 
-import { adduser } from './service/api';
 
 const useStyle = makeStyles({
   container: {
     width: "50%",
     margin: "auto",
-    border: "2px solid  black",
-    borderRadius: "20px",
     '& > *': {
       margin:"10px"
     }
@@ -26,29 +24,43 @@ const initialValue = {
   phone:""
 }
 
-function AddUser() {
+function EditUser() {
   const [user, setUser] = useState(initialValue)
-  const { name, userName, email, phone } = user;
-  const history = useHistory()
+    const { name, userName, email, phone } = user;
+    let classes = useStyle();
+    const history = useHistory();
+    const { id } = useParams();
 
-  let onValueChange = (e) => {
-    console.log(e.target.value)
+    useEffect(() => {
+        loadUserData();
+    },[]);
+    
+       const loadUserData = async () => {
+        
+        const response = await getUsers(id);
+           setUser(response.data)
+           
+    }
+
+     let onValueChange = (e) => {
     setUser({...user , [e.target.name]:e.target.value})
-     console.log(user)
   }
+    
+
+ 
   
-  const addUserDetails = async () => {
-    await adduser(user);
-    history.push("./all")
+  const EditUserDetails = async () => {
+    await editUser(id , user);
+    history.push("/all")
   }
 
 
-  let classes = useStyle()
+  
 
     return <div>
-      <h1>.</h1>
+      <h1>add user Page  here I will add all user and then done</h1>
       <FormGroup className={classes.container}>
-        <Typography variant="h4">add user</Typography>
+        <Typography variant="h4">Edit user</Typography>
         <FormControl>
           <InputLabel>Name</InputLabel>
           <Input onChange={(e)=>onValueChange(e)} name='name' value={name}/>
@@ -65,9 +77,9 @@ function AddUser() {
           <InputLabel>Phone</InputLabel>
           <Input  onChange={(e)=>onValueChange(e)} name='phone' value={phone}/>
         </FormControl>
-        <Button onClick={()=>addUserDetails()} variant='contained' color='primary'>ADD USER</Button>
+        <Button onClick={()=> EditUserDetails()} variant='contained' color='primary'>Edit USER</Button>
        </FormGroup>
   </div>;
 }
 
-export default AddUser;
+export default EditUser;

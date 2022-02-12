@@ -2,7 +2,8 @@ import { Table, TableHead, TableRow, TableCell, TableBody ,makeStyles, Button } 
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getUsers } from './service/api';
+import { getUsers , deleteUser } from './service/api';
+import { Link } from 'react-router-dom'; 
 
 const useStyles = makeStyles({
   table: {
@@ -37,13 +38,19 @@ function AllUser() {
   },[])
 
 
-  const getALLUsers = async() => {
+  const getALLUsers = async () => {
+    
     const response = await getUsers();
     console.log(response.data)
     setUsers(response.data)
   }
+
+  const deleteUserData = async(id) => {
+    await deleteUser(id);
+    getALLUsers();
+  }
     return <div>
-      <h1> I can see all users</h1>
+     
 
       <Table className={classes.table}>
         <TableHead>
@@ -66,8 +73,8 @@ function AllUser() {
                 <TableCell>{ item.email}</TableCell>
                 <TableCell>{item.phone}</TableCell>
                 <TableCell>
-                  <Button variant='contained' color='primary' style={{marginRight:10}} >edit</Button>
-                  <Button variant='contained' color='secondary'>Delete</Button>
+                  <Button variant='contained' color='primary' style={{marginRight:10}} component={Link} to={`edit/${item.id}`} >edit</Button>
+                  <Button variant='contained' color='secondary' onClick={()=>deleteUserData(item.id)}>Delete</Button>
                 </TableCell>
           </TableRow>
             ))
