@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "name": "Rohit sharma",
+      "username": "hitman",
+      "email": "rohitsharma@gmail.com",
+      "phone": "1234567890",
+      "id": 1
+    },
+    {
+      "name": "suraj kumar",
+      "userName": "jdsjfa",
+      "email": "sdfasdf",
+      "phone": "09504648021",
+      "id": 2
+    },
+    {
+      "name": "jay bhanushali",
+      "userName": "jdsjfa",
+      "email": "jay@ksdjfa;lsdiog",
+      "phone": "546456444",
+      "id": 3
+    },
+    {
+      "name": "sanoj kumar",
+      "userName": "sanoj kumar da",
+      "email": "Sanoj_nj2_148@masai.school",
+      "phone": "09504648021",
+      "id": 4
+    },
+    {
+      "name": "suraj kumar",
+      "userName": "jhjh",
+      "email": "Sanoj_nj2_148@masai.school",
+      "phone": "09504648021",
+      "id": 5
+    }
+  ]
+}
